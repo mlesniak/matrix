@@ -18,7 +18,8 @@ class Char {
     }
 
     update() {
-        if (frameCount % 30 == 0) {
+        let isUpdate = random() < 0.1;
+        if (isUpdate) {
             this.setRandomCharacter();
         }
         this.y = this.y + this.speed;
@@ -28,15 +29,40 @@ class Char {
     }
 }
 
-let char;
+class Column {
+    constructor(x, speed) {
+        this.x = x;
+        this.speed = speed;
+        
+        let num = random(5, 30);
+        this.chars = [];
+        for (let i = 0; i < num; i++) {
+            this.chars.push(new Char(x, 0 + i * textSize(), this.speed));
+        }
+    }
+
+    render() {
+        for (let i = 0; i < this.chars.length; i++) {
+            this.chars[i].render();
+        }
+    }
+
+    update() {
+        for (let i = 0; i < this.chars.length; i++) {
+            this.chars[i].update();
+        }
+    }
+}
+
+let column;
 
 function setup() {
     let cnv = createCanvas(windowWidth + 8, windowHeight + 8);
-    char = new Char(100, 100, 10);
+    column = new Column(100, 5);
 }
 
 function draw() {
     background(0);
-    char.render();
-    char.update();
+    column.render();
+    column.update();
 }
