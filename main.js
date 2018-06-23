@@ -16,6 +16,12 @@ class Char {
         fill(0, 200, 0);
         text(this.char, this.x, this.y)
     }
+
+    update() {
+        if (frameCount % 30 == 0) {
+            this.setRandomCharacter();
+        }
+    }
 }
 
 let char;
@@ -28,4 +34,5 @@ function setup() {
 function draw() {
     background(0);
     char.render();
+    char.update();
 }
