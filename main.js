@@ -35,9 +35,10 @@ class Column {
         this.speed = speed;
         
         let num = random(5, 30);
+        let offset = random(-1000, 0);
         this.chars = [];
         for (let i = 0; i < num; i++) {
-            this.chars.push(new Char(x, 0 + i * textSize(), this.speed));
+            this.chars.push(new Char(x, 0 + i * textSize() + offset, this.speed));
         }
     }
 
