@@ -21,6 +21,7 @@ class Char {
         if (frameCount % 30 == 0) {
             this.setRandomCharacter();
         }
+        this.y = this.y + this.speed;
     }
 }
 
@@ -28,7 +29,7 @@ let char;
 
 function setup() {
     let cnv = createCanvas(windowWidth + 8, windowHeight + 8);
-    char = new Char(100, 100, 0);
+    char = new Char(100, 100, 1);
 }
 
 function draw() {
