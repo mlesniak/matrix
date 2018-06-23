@@ -1,6 +1,8 @@
 // TODO ML Change this with j and k
 // TODO ML Fullscreen with f
 
+let fs = false;
+let size = 16;
 
 class Char {
     constructor(x, y, speed, highlight) {
@@ -43,11 +45,11 @@ class Column {
         this.x = x;
         this.speed = speed;
         
-        let num = floor(random(5, 40));
+        let rowLength = floor(random(10, 40));
         let offset = random(-1000, 0);
         this.chars = [];
-        for (let i = 0; i < num; i++) {
-            let isLast = i == num - 1;
+        for (let i = 0; i < rowLength; i++) {
+            let isLast = i == rowLength - 1;
             this.chars.push(new Char(x, 0 + i * textSize() + offset, this.speed, isLast));
         }
     }
@@ -65,20 +67,55 @@ class Column {
     }
 }
 
-let columns = [];
+let columns;
 
 function setup() {
+    columns = [];
+    textSize(size);
     let cnv = createCanvas(windowWidth + 8, windowHeight + 8);
     for (let i = 0; i < windowWidth / textSize(); i++) {
-        let speed = random(5, 10);
+        let speed = random(3, 5);
         columns.push(new Column(i * textSize(), speed))
     }
 }
 
 function draw() {
-    background(0, 200);
+    background(0, 150);
     for (let i = 0; i < columns.length; i++) {
         columns[i].render();
         columns[i].update();
     }
 }
+
+function keyPressed() {
+    if (key === 'F') {
+        fs = !fs;
+        fullscreen(fs);
+        setup();
+    }
+
+    if (key === 'R') {
+        setup();
+    }
+
+    console.log(key);
+    if (key === 'K') {
+        size += 2;
+        setup();
+    }
+
+    if (key === 'J') {
+        if (size == 4) {
+            return;
+        }
+        size -= 2;
+        setup();
+    }
+}
+
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    setup();
+}
+
