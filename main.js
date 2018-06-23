@@ -22,6 +22,9 @@ class Char {
             this.setRandomCharacter();
         }
         this.y = this.y + this.speed;
+        if (this.y > height) {
+            this.y = 0;
+        }
     }
 }
 
@@ -29,7 +32,7 @@ let char;
 
 function setup() {
     let cnv = createCanvas(windowWidth + 8, windowHeight + 8);
-    char = new Char(100, 100, 1);
+    char = new Char(100, 100, 10);
 }
 
 function draw() {
