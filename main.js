@@ -1,8 +1,7 @@
 // TODO ML Change this with j and k
-// TODO ML Fullscreen with f
 
 let fs = false;
-let size = 16;
+let size = 20;
 
 class Char {
     constructor(x, y, speed, highlight) {
@@ -45,12 +44,13 @@ class Column {
         this.x = x;
         this.speed = speed;
         
-        let rowLength = floor(random(10, 40));
+        // Maximum of 1/2 of window height
+        let rowLength = floor(random(10, height / size * 0.50));
         let offset = random(-1000, 0);
         this.chars = [];
         for (let i = 0; i < rowLength; i++) {
             let isLast = i == rowLength - 1;
-            this.chars.push(new Char(x, 0 + i * textSize() + offset, this.speed, isLast));
+            this.chars.push(new Char(x, 0 + i * size + offset, this.speed, isLast));
         }
     }
 
@@ -71,16 +71,16 @@ let columns;
 
 function setup() {
     columns = [];
-    textSize(size);
     let cnv = createCanvas(windowWidth + 8, windowHeight + 8);
-    for (let i = 0; i < windowWidth / textSize(); i++) {
+    for (let i = 0; i < windowWidth / size; i++) {
         let speed = random(3, 5);
-        columns.push(new Column(i * textSize(), speed))
+        columns.push(new Column(i * size, speed))
     }
 }
 
 function draw() {
     background(0, 150);
+    textSize(size);
     for (let i = 0; i < columns.length; i++) {
         columns[i].render();
         columns[i].update();
