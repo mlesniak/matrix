@@ -1,19 +1,28 @@
+// TODO ML Change this with j and k
+// TODO ML Fullscreen with f
+
+
 class Char {
-    constructor(x, y, speed) {
+    constructor(x, y, speed, highlight) {
         this.x = x;
         this.y = y;
         this.speed = speed;
+        this.highlight = highlight;
         this.setRandomCharacter();
     }
 
     setRandomCharacter() {
-        let min = 65;
-        let max = 65 + 26;
+        let min = 48;
+        let max = 256;
         this.char = String.fromCharCode(random(min, max));
     }
 
     render() {
-        fill(0, 200, 0);
+        if (this.highlight) {
+            fill(200, 200, 200);
+        } else {
+            fill(0, 200, 0);
+        }
         text(this.char, this.x, this.y)
     }
 
@@ -34,11 +43,12 @@ class Column {
         this.x = x;
         this.speed = speed;
         
-        let num = random(5, 30);
+        let num = floor(random(5, 40));
         let offset = random(-1000, 0);
         this.chars = [];
         for (let i = 0; i < num; i++) {
-            this.chars.push(new Char(x, 0 + i * textSize() + offset, this.speed));
+            let isLast = i == num - 1;
+            this.chars.push(new Char(x, 0 + i * textSize() + offset, this.speed, isLast));
         }
     }
 
