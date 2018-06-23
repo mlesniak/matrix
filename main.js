@@ -11,8 +11,9 @@ class Char {
     }
 
     setRandomCharacter() {
-        let min = 48;
-        let max = 256;
+        // http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml
+        let min = 0x30a0;
+        let max = 0x30ff;
         this.char = String.fromCharCode(random(min, max));
     }
 
@@ -26,7 +27,7 @@ class Char {
     }
 
     update() {
-        let isUpdate = random() < 0.1;
+        let isUpdate = random() < 0.05;
         if (isUpdate) {
             this.setRandomCharacter();
         }
@@ -77,7 +78,7 @@ function setup() {
 }
 
 function draw() {
-    background(0, 150);
+    background(0, 100);
     textSize(size);
     for (let i = 0; i < columns.length; i++) {
         columns[i].render();
