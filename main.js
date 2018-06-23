@@ -54,15 +54,20 @@ class Column {
     }
 }
 
-let column;
+let columns = [];
 
 function setup() {
     let cnv = createCanvas(windowWidth + 8, windowHeight + 8);
-    column = new Column(100, 5);
+    for (let i = 0; i < windowWidth / textSize(); i++) {
+        let speed = random(5, 10);
+        columns.push(new Column(i * textSize(), speed))
+    }
 }
 
 function draw() {
     background(0);
-    column.render();
-    column.update();
+    for (let i = 0; i < columns.length; i++) {
+        columns[i].render();
+        columns[i].update();
+    }
 }
