@@ -76,7 +76,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(0, 200);
     for (let i = 0; i < columns.length; i++) {
         columns[i].render();
         columns[i].update();
