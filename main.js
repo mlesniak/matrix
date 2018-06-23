@@ -1,5 +1,3 @@
-// TODO ML Change this with j and k
-
 let fs = false;
 let size = 20;
 
@@ -98,7 +96,6 @@ function keyPressed() {
         setup();
     }
 
-    console.log(key);
     if (key === 'K') {
         size += 2;
         setup();
